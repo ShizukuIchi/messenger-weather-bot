@@ -27,7 +27,6 @@ app.get('/webhook/', function (req, res) {
 	}
 })
 
-// to post data
 app.post('/webhook/', function (req, res) {
 	let messaging_events = req.body.entry[0].messaging
 	for (let i = 0; i < messaging_events.length; i++) {
@@ -35,12 +34,7 @@ app.post('/webhook/', function (req, res) {
 		let sender = event.sender.id
 		if (event.message && event.message.text) {
 			let text = event.message.text
-			if (text === 'Generic'){ 
-				console.log("welcome to chatbot")
-				//sendGenericMessage(sender)
-				continue
-			}
-			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+			sendTextMessage(sender, text.substring(0, 200))
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
@@ -52,8 +46,6 @@ app.post('/webhook/', function (req, res) {
 })
 
 
-// recommended to inject access tokens as environmental variables, e.g.
-// const token = process.env.FB_PAGE_ACCESS_TOKEN
 const token = process.env.FB_PAGE_ACCESS_TOKEN
 
 function sendTextMessage(sender, text) {
@@ -76,7 +68,6 @@ function sendTextMessage(sender, text) {
 	})
 }
 
-// spin spin sugar
 app.listen(app.get('port'), function() {
 	console.log('running on port', app.get('port'))
 })
