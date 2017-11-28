@@ -3,7 +3,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
-const getRandomMessage = require('./replyMessage.js')
+const getRandomReply = require('./replyMessage.js').getRandomReply
 const app = express()
 
 app.set('port', (process.env.PORT || 5000))
@@ -35,7 +35,7 @@ app.post('/webhook/', function (req, res) {
 		let sender = event.sender.id
 		if (event.message && event.message.text) {
 			let text = event.message.text
-			sendTextMessage(sender, getRandomMessage())
+			sendTextMessage(sender, getRandomReply())
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
