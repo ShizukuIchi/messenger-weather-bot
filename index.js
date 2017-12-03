@@ -4,7 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const replyMessage = require('./replyMessage.js')
-const getWeather = require('./getWeather.js')
+const getWeather = require('./getWeather.js').getWeather
 const app = express()
 
 app.set('port', (process.env.PORT || 5000))
