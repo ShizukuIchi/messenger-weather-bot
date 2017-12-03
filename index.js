@@ -4,6 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const replyMessage = require('./replyMessage.js')
+const getWeather = require('./getWeather.js')
 const app = express()
 
 app.set('port', (process.env.PORT || 5000))
@@ -35,7 +36,13 @@ app.post('/webhook/', function (req, res) {
 		let sender = event.sender.id
 		if (event.message && event.message.text) {
 			let text = event.message.text
-			sendTextMessage(sender, replyMessage.getRandomReply())
+			let reverseText = text.split('').reverse().join('')
+			if (reverseText[0]==='氣' && reverseText[1]==='天'){
+				weather = getWeather(text.split('天氣')[0])
+				sendTextMessage(sender, weather.name+'\n'+weather.weather)
+			}
+			else
+				sendTextMessage(sender, replyMessage.getRandomReply())
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
