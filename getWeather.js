@@ -2,8 +2,8 @@ const xmlParser = require('xml2js').parseString
 const fetch = require("isomorphic-fetch")
 
 const dataid = 'F-C0032-001'
-// const apikey = process.env.WEATHER_API_KEY
-const apikey = 'CWB-B152B152-D5CE-4D64-AC6A-54DDD882F0C5'
+const apikey = process.env.WEATHER_API_KEY
+
 const url = `http://opendata.cwb.gov.tw/opendataapi?dataid=${dataid}&authorizationkey=${apikey}`
 
 const getLocationWeather = e => (
