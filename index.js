@@ -40,7 +40,11 @@ app.post('/webhook/', function (req, res) {
 			if (reverseText[0]==='氣' && reverseText[1]==='天'){
 				getWeather(text.split('天氣')[0])
 				.then(weather=>{
-					sendTextMessage(sender, weather.name+'\n天氣: '+weather.weather+'\n最高溫:'+weather.highestT+', 最低溫:'+weather.lowestT+'\n'+'降雨機率:'+weather.rainRate)			
+					if (weather) {
+						sendTextMessage(sender, weather.name+'\n天氣: '+weather.weather+'\n最高溫:'+weather.highestT+', 最低溫:'+weather.lowestT+'\n'+'降雨機率:'+weather.rainRate)		
+					} else {
+						sendTextMessage(sender, '沒有該縣市QQ (可能是"臺"?)')
+					}
 				})
 			}
 			else
