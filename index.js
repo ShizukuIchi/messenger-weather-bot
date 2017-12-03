@@ -38,8 +38,10 @@ app.post('/webhook/', function (req, res) {
 			let text = event.message.text
 			let reverseText = text.split('').reverse().join('')
 			if (reverseText[0]==='氣' && reverseText[1]==='天'){
-				weather = getWeather(text.split('天氣')[0])
-				sendTextMessage(sender, weather.name+'\n'+weather.weather)
+				getWeather(text.split('天氣')[0])
+				.then(weather=>{
+					sendTextMessage(sender, weather.name+'\n'+weather.weather+'\n最高溫:'+weather.highestT+', 最低溫:'+weather.lowestT+'\n'+'降雨機率:'+weather.rainRate)			
+				})
 			}
 			else
 				sendTextMessage(sender, replyMessage.getRandomReply())
