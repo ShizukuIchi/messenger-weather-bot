@@ -38,6 +38,7 @@ app.get('/webhook/', function (req, res) {
 
 app.post('/sendme/', function (req, res) {
 	if (req.body.message !== '') {
+		console.log(req.body)
 		sendTextMessage('1681364401894220', req.body.message);
 		res.sendStatus(200);
 	} else {
