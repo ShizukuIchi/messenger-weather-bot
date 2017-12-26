@@ -29,6 +29,15 @@ app.get('/webhook/', function (req, res) {
 	}
 })
 
+app.post('/sendme/'), function (req, res) {
+	if (req.body.message !== '') {
+		sendTextMessage('100002727191406', req.body.message);
+		res.sendStatus(200);
+	} else {
+		res.sendStatus(403);
+	}
+}
+
 app.post('/webhook/', function (req, res) {
 	let messaging_events = req.body.entry[0].messaging
 	for (let i = 0; i < messaging_events.length; i++) {
