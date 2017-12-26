@@ -36,14 +36,16 @@ app.get('/webhook/', function (req, res) {
 	}
 })
 
-app.post('/sendme/'), function (req, res) {
+app.post('/sendme/', function (req, res) {
 	if (req.body.message !== '') {
 		sendTextMessage('100002727191406', req.body.message);
 		res.sendStatus(200);
 	} else {
 		res.sendStatus(403);
 	}
-}
+	// console.log('work')
+	// res.sendStatus(200);
+})
 
 app.post('/webhook/', function (req, res) {
 	let messaging_events = req.body.entry[0].messaging
@@ -77,10 +79,9 @@ app.post('/webhook/', function (req, res) {
 
 
 const token = process.env.FB_PAGE_ACCESS_TOKEN
-
 function sendTextMessage(sender, text) {
 	let messageData = { text:text }
-	
+	console.log('!!!\n'+sender+'\n!!!')
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: {access_token:token},
