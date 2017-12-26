@@ -39,7 +39,7 @@ app.get('/webhook/', function (req, res) {
 app.post('/sendme/', function (req, res) {
 	if (req.body.message !== '') {
 		console.log(req.body)
-		sendTextMessage('ID', req.body.message);
+		sendTextMessage(process.env.ID, req.body.message);
 		res.sendStatus(200);
 	} else {
 		res.sendStatus(403);
@@ -80,7 +80,6 @@ app.post('/webhook/', function (req, res) {
 const token = process.env.FB_PAGE_ACCESS_TOKEN
 function sendTextMessage(sender, text) {
 	let messageData = { text:text }
-	console.log('!!!\n'+sender+'\n!!!')
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: {access_token:token},
