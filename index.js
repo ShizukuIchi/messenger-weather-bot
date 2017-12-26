@@ -43,8 +43,6 @@ app.post('/sendme/', function (req, res) {
 	} else {
 		res.sendStatus(403);
 	}
-	// console.log('work')
-	// res.sendStatus(200);
 })
 
 app.post('/webhook/', function (req, res) {
